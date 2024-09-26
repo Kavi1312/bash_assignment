@@ -296,7 +296,7 @@ top command provides real-time system stats, including CPU load averages.
 grep "load average" filters the output to only include the load average line.
 awk '{print $10 $11 $12}' extracts the last three fields, which are the 1-minute, 5-minute, and 15-minute CPU load averages.
 The result is stored in the variable cpu_load.
- Get Disk Usage
+ Get Disk Usage:
 disk_usage=$(df -h)
 df -h displays the current disk usage of mounted filesystems in a human-readable format (-h flag).
 The output includes the total size, used space, available space, and usage percentage.
@@ -314,7 +314,7 @@ The > operator writes the output to the file specified in $output_file (system_r
  Output Message After Saving the Report
 echo "System information report saved to $output_file"
 After successfully generating the report, this message is displayed in the terminal, informing the user that the system information has been saved to the file.
-ummary of the Collected Information:
+summary of the Collected Information:
 System Uptime: Shows how long the system has been running.
 Memory Usage: Displays total, used, and free memory.
 CPU Load: Shows system load averages for the past 1, 5, and 15 minutes.
