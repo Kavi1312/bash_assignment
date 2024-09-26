@@ -140,26 +140,6 @@ User ID: 1000
 Group ID: 1000
 
 
-
-5. File Permission Checker:
-Write a script that takes a file as an argument and checks if the file has read, write, and execute permissions. The script should display appropriate messages for each permission.
-
-Disk Usage Check:
-The script checks the disk usage of the root (/) filesystem using the df command.
-Threshold:
-The script compares the current disk usage with a pre-defined threshold (set to 80% by default).
-Alert:
-If the current disk usage exceeds the threshold, an email alert is sent to the system administrator.
-Loggng:
-The script also prints relevant information to the terminal about the current disk usage and whether an email was sent.
-To run the script automatically at regular intervals (e.g., daily), you can schedule it using cron:
-Open the crontab editor:
-crontab -e
-Add a line like this to run the script every day at 8:00 AM:
-0 8 * * * /path/to/disk_usage_alert.sh
-Replace /path/to/disk_usage_alert.sh with the actual path to your script.
-
-
 4. Disk Usage Alert:
 Write a script that checks the disk usage of the root filesystem. If the disk usage is above 80%, the script should send an email alert to the system administrator.
 xplanation of the Code:
@@ -194,6 +174,26 @@ This outputs a message about the disk usage.
 
 
 
+5. File Permission Checker:
+Write a script that takes a file as an argument and checks if the file has read, write, and execute permissions. The script should display appropriate messages for each permission.
+
+Disk Usage Check:
+The script checks the disk usage of the root (/) filesystem using the df command.
+Threshold:
+The script compares the current disk usage with a pre-defined threshold (set to 80% by default).
+Alert:
+If the current disk usage exceeds the threshold, an email alert is sent to the system administrator.
+Loggng:
+The script also prints relevant information to the terminal about the current disk usage and whether an email was sent.
+To run the script automatically at regular intervals (e.g., daily), you can schedule it using cron:
+Open the crontab editor:
+crontab -e
+Add a line like this to run the script every day at 8:00 AM:
+0 8 * * * /path/to/disk_usage_alert.sh
+Replace /path/to/disk_usage_alert.sh with the actual path to your script.
+
+
+
 6. Automated Backup:
 Write a script that compresses the `/home/user/documents` directory into a tarball named `documents_backup.tar.gz` and moves it to the `/home/user/backup` directory. This script should be scheduled to run daily using cron.
 for above:- Explanation of Changes:
@@ -224,7 +224,6 @@ LOG_FILE is the path to the log file where the script will record its actions.
 PROCESS_NAME is the name of the process you want to monitor, in this case, apache2.
 Check if the Process is Running:
 if ! pgrep -x "$PROCESS_NAME" > /dev/null
-
 pgrep -x "$PROCESS_NAME" checks if a process with the exact name apache2 is running.
 > /dev/null discards the output of pgrep.
 ! negates the condition, so the if statement is true if pgrep does not find the process.
@@ -270,7 +269,6 @@ chmod +x count_file_contents.sh
 Run the script with the path to your text file:
 ./count_file_contents.sh /mnt/c/Users/Vika2/Documents/day2.txt
 
-
  9.System Information Report:
 Write a script that generates a system information report. The report should include:
    - System uptime
@@ -278,43 +276,42 @@ Write a script that generates a system information report. The report should inc
    - CPU load
    - Disk usage
    - Running processes
-
-1. Setting the Output File
+Setting the Output File
 output_file="system_report.txt"
 output_file is a variable that stores the name of the file where the system report will be saved.
 All collected system information will be written to this file.
-2. Get System Uptime
+ Get System Uptime
 uptime_info=$(uptime -p)
 uptime command shows how long the system has been running.
 -p flag makes the output more human-readable (e.g., "up 5 hours, 30 minutes").
 The result is stored in the variable uptime_info.
-3. Get Memory Usage
+Get Memory Usage
 memory_info=$(free -h)
 free -h displays the system's memory usage, showing total, used, and available memory in human-readable format (-h flag).
 The information is stored in the variable memory_info.
-4. Get CPU Load
+ Get CPU Load
 cpu_load=$(top -bn1 | grep "load average" | awk '{print $10 $11 $12}')
 top command provides real-time system stats, including CPU load averages.
 -b runs top in batch mode, and -n1 limits it to one iteration.
 grep "load average" filters the output to only include the load average line.
 awk '{print $10 $11 $12}' extracts the last three fields, which are the 1-minute, 5-minute, and 15-minute CPU load averages.
 The result is stored in the variable cpu_load.
-5. Get Disk Usage
+ Get Disk Usage
 disk_usage=$(df -h)
 df -h displays the current disk usage of mounted filesystems in a human-readable format (-h flag).
 The output includes the total size, used space, available space, and usage percentage.
 The result is stored in the variable disk_usage.
-6. Get Running Processes (Top 10 by Memory Usage)
+ Get Running Processes (Top 10 by Memory Usage)
 running_processes=$(ps aux --sort=-%mem | head -n 10)
 ps aux displays all running processes along with detailed information like CPU and memory usage.
 --sort=-%mem sorts the processes by memory usage in descending order (largest memory usage first).
 head -n 10 limits the output to the top 10 processes.
 The result is stored in the variable running_processes.
-7. Writing the System Information to the Report File
+ Writing the System Information to the Report File
 The script uses a block ({ ... }) to write all the system information into the file (system_report.txt).
 The echo commands are used to format the report with headings like "System Uptime," "Memory Usage," etc., and display the content stored in the variables ($uptime_info, $memory_info, etc.).
 The > operator writes the output to the file specified in $output_file (system_report.txt), overwriting the file if it already exists.
-8. Output Message After Saving the Report
+ Output Message After Saving the Report
 echo "System information report saved to $output_file"
 After successfully generating the report, this message is displayed in the terminal, informing the user that the system information has been saved to the file.
 ummary of the Collected Information:
@@ -326,10 +323,7 @@ Top 10 Running Processes: Lists the top 10 processes consuming the most memory.
 
 
 
-
-
 10. Simple Calculator:
-
 Write a script that acts as a simple calculator. The script should prompt the user to enter two numbers and an operator (+, -, *, /) and then display the result of the operation.
 Prerequisites
 The script relies on the bc command, which is a command-line calculator that supports basic arithmetic and floating-point calculations. It is available by default in most Linux distributions.
