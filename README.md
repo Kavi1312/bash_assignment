@@ -50,37 +50,17 @@ If the directory does not exist, you will receive an error message.
 Understanding the Script:
 Argument Check:
 The script checks if exactly one argument (a directory path) is provided.
-
-
-Copy code
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <directory>"
-    exit 1
-fi
 Directory Existence Check:
 The script verifies if the provided directory exists.
-
-Copy code
-if [ ! -d "$SOURCE_DIR" ]; then
-    echo "The directory $SOURCE_DIR does not exist."
-    exit 1
-fi
 Timestamp Creation:
 The script creates a timestamp using the date command.
 
-bash
-Copy code
 TIMESTAMP=$(date +"%Y%m%d%H%M%S")
 Backup Directory Creation:
 A new directory (backup_<timestamp>) is created within the provided directory.
-
-BACKUP_DIR="$SOURCE_DIR/backup_$TIMESTAMP"
-mkdir -p "$BACKUP_DIR"
 File Copying:
 The script uses the find command to search for .txt files in the source directory and copies them into the backup directory.
 
-
-find "$SOURCE_DIR" -maxdepth 1 -type f -name "*.txt" -exec cp {} "$BACKUP_DIR" \;
 Error Handling:
 Wrong Number of Arguments:
 If the user doesn't provide exactly one directory as an argument, the script outputs usage information and exits.
@@ -90,3 +70,76 @@ Customization:
 File Types:
 To back up different file types (e.g., .log or .csv), change *.txt in the find command:
 find "$SOURCE_DIR" -maxdepth 1 -type f -name "*.log" -exec cp {} "$BACKUP_DIR" \;
+
+
+3. User Information:
+
+Write a script that displays the following information about the user:
+
+   - Username
+
+   - User ID
+
+   - Group ID
+
+   - Home Directory
+User Information Script
+This Bash script displays information about the current user, including:
+
+Username
+User ID
+Group ID
+Home Directory
+Shell being used
+
+The script collects information about the current user by using system commands such as whoami, id, and environment variables like $HOME and $SHELL. It then prints this information in a readable format.
+In nano, press Ctrl + O to save, then Ctrl + X to exit.
+Step 2: Make the Script Executable
+Run the following command to make the script executable:
+chmod +x user_info.sh
+This command gives the script permission to be executed.
+Step 3: Run the Script
+To run the script, enter the following command:
+./user_info.sh
+Example Output:
+When the script runs, it will output something like this:
+Username: your-username
+User ID: 1000
+Group ID: 1000
+Home Directory: /home/your-username
+Shell being used: /bin/bash
+Explanation of the Script
+whoami:
+Retrieves the current username of the logged-in user.
+USERNAME=$(whoami)
+id -u:
+Retrieves the user ID of the logged-in user.
+USER_ID=$(id -u)
+id -g:
+Retrieves the group ID of the logged-in user.
+GROUP_ID=$(id -g)
+$HOME:
+Retrieves the home directory of the user using the $HOME environment variable.
+HOME_DIR=$HOME
+$SHELL:
+Retrieves the default shell being used by the user using the $SHELL environment variable.
+SHELL_USED=$SHELL
+Customization:
+You can modify the script to display other information about the user or system (e.g., the user’s groups, or system uptime) by using additional commands like id -G, uptime, etc.
+Troubleshooting:
+Permission Denied: If you get a "permission denied" error while running the script, ensure you ran the chmod +x user_info.sh command to make the script executable.
+Command Not Found: If you encounter "command not found" errors, make sure you're running the script in a Linux or Unix environment with the correct tools installed.
+The script collects information about the current user by using system commands such as whoami, id, and environment variables like $HOME and $SHELL. It then prints this information in a readable format.
+Use a text editor like nano or vi to create the script file:
+Step 1: Make the Script Executable
+Run the following command to make the script executable:
+chmod +x user_info.sh
+This command gives the script permission to be executed.
+Step 2 Run the Script
+To run the script, enter the following command:
+./user_info.sh
+Example Output:
+When the script runs, it will output something like this:
+Username: your-username
+User ID: 1000
+Group ID: 1000
